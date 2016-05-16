@@ -15,7 +15,7 @@
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 
-@interface SEPHI_CommentController ()<UITableViewDataSource, UITableViewDelegate>
+@interface SEPHI_CommentController ()<UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate,UITextViewDelegate>
 
 @property (nonatomic, strong) UITableView *commentView;
 /** 评论模型数组 */
@@ -24,6 +24,8 @@
 @property (nonatomic, strong) UITextView *commentForPost;
 /** 发送 */
 @property (nonatomic, strong) UIButton *sendBtn;
+/** height */
+@property (nonatomic, assign) double keyHeight;
 @end
 
 @implementation SEPHI_CommentController
@@ -39,11 +41,31 @@
     _commentView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadComment)];
     _commentView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"leftbackimage"]];
     
-    _commentForPost = [[UITextView alloc] initWithFrame:CGRectMake(0, kScreenHeight - 64 -40, kScreenWidth - 60, 40)];
+    _commentForPost = [[UITextView alloc] initWithFrame:CGRectMake(5, kScreenHeight - 64 -40, kScreenWidth - 60, 35)];
     _sendBtn = [[UIButton alloc] initWithFrame:CGRectMake(kScreenWidth - 60, kScreenHeight - 64 -40, 60, 40)];
     [_sendBtn setTitle:@"发送" forState:UIControlStateNormal];
     [_sendBtn addTarget:self action:@selector(send) forControlEvents:UIControlEventTouchUpInside];
     
+    //定义一个toolBar
+    UIToolbar *topView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 30)];
+    //设置style
+    [topView setBarStyle:UIBarStyleBlack];
+    //定义两个flexibleSpace的button，放在toolBar上，这样完成按钮就会在最右边
+    UIBarButtonItem *button1 = [[UIBarButtonItem  alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    UIBarButtonItem *button2 = [[UIBarButtonItem  alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    
+    //定义完成按钮
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc]initWithTitle:@"完成"style:UIBarButtonItemStyleDone
+                                                                 target:self action:@selector(resignKeyboard)];
+    //在toolBar上加上这些按钮
+    NSArray *buttonsArray = [NSArray arrayWithObjects:button1,button2,doneButton,nil];
+    
+    [topView setItems:buttonsArray];
+    
+    _commentForPost.delegate = self;
+    
+    [_commentForPost setInputAccessoryView:topView];
+
     // 马上进入刷新状态
     [_commentView.mj_header beginRefreshing];
     [self.view addSubview:_commentView];
@@ -54,6 +76,8 @@
 
 - (void) send
 {
+    BmobUser *bUser = [BmobUser getCurrentUser];
+    if (bUser) {
     [_commentView.mj_header beginRefreshing];
     BmobObject *obj = [BmobObject objectWithClassName:@"comment"];
     BmobUser *bUser = [BmobUser getCurrentUser];
@@ -74,6 +98,11 @@
     }];
     [self.commentView reloadData];
     [_commentView.mj_header endRefreshing];
+    }else{
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"请先登录再作评论" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];;
+        [alert show];
+        [self resignKeyboard];
+    }
 }
 - (void) loadComment
 {
@@ -113,5 +142,54 @@
     [cell setCommentCell:_commentArray[indexPath.row] andTag:indexPath.row];
     return cell;
 }
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    //注册通知,监听键盘出现
+    [[NSNotificationCenter defaultCenter]addObserver:self
+                                            selector:@selector(handleKeyboardDidShow:)
+                                                name:UIKeyboardDidShowNotification
+                                              object:nil];
+    //注册通知，监听键盘消失事件
+    [[NSNotificationCenter defaultCenter]addObserver:self
+                                            selector:@selector(handleKeyboardDidHidden)
+                                                name:UIKeyboardDidHideNotification
+                                              object:nil];
+    [super viewWillAppear:YES];
+}
+
+//监听事件
+- (void)handleKeyboardDidShow:(NSNotification*)paramNotification
+{
+    //获取键盘高度
+    NSValue *keyboardRectAsObject=[[paramNotification userInfo]objectForKey:UIKeyboardFrameEndUserInfoKey];
+    
+    CGRect keyboardRect;
+    [keyboardRectAsObject getValue:&keyboardRect];
+    _keyHeight = keyboardRect.size.height;
+    
+    self.commentForPost.frame = CGRectMake(self.commentForPost.frame.origin.x, self.commentForPost.frame.origin.y - keyboardRect.size.height, self.commentForPost.frame.size.width, self.commentForPost.frame.size.height);
+    self.sendBtn.frame = CGRectMake(self.sendBtn.frame.origin.x, self.sendBtn.frame.origin.y - keyboardRect.size.height, self.sendBtn.frame.size.width, self.sendBtn.frame.size.height);
+//    self.commentForPost.contentInset = UIEdgeInsetsMake(0, 0, keyboardRect.size.height, 0);
+}
+
+- (void)handleKeyboardDidHidden
+{
+    self.commentForPost.contentInset = UIEdgeInsetsZero;
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+//点击完成文章内容退出键盘
+- (void)resignKeyboard
+{
+    self.commentForPost.frame = CGRectMake(self.commentForPost.frame.origin.x, self.commentForPost.frame.origin.y + _keyHeight, self.commentForPost.frame.size.width, self.commentForPost.frame.size.height);
+    self.sendBtn.frame = CGRectMake(self.sendBtn.frame.origin.x, self.sendBtn.frame.origin.y + _keyHeight, self.sendBtn.frame.size.width, self.sendBtn.frame.size.height);
+    [_commentForPost resignFirstResponder];
+    
+}
+
 
 @end

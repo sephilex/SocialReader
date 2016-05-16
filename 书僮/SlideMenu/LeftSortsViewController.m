@@ -114,16 +114,26 @@
             [tempAppDel.mainNavigationController pushViewController:syncVc animated:NO];
             break;
         case 4:
-            showArticleVc = [[SEPHI_ShowArticleController alloc] init];
-            showArticleVc.tag = 2;
-            [tempAppDel.mainNavigationController pushViewController:showArticleVc animated:NO];
-            showArticleVc.title = self.sorts[indexPath.row];
+            if (bUser) {
+                showArticleVc = [[SEPHI_ShowArticleController alloc] init];
+                showArticleVc.tag = 2;
+                [tempAppDel.mainNavigationController pushViewController:showArticleVc animated:NO];
+                showArticleVc.title = self.sorts[indexPath.row];
+            }else{
+                UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"请先登录再查看您的收藏" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];;
+                [alert show];
+            }
             break;
         case 5:
-            showArticleVc = [[SEPHI_ShowArticleController alloc] init];
-            showArticleVc.tag = 3;
-            [tempAppDel.mainNavigationController pushViewController:showArticleVc animated:NO];
-            showArticleVc.title = self.sorts[indexPath.row];
+            if (bUser) {
+                showArticleVc = [[SEPHI_ShowArticleController alloc] init];
+                showArticleVc.tag = 3;
+                [tempAppDel.mainNavigationController pushViewController:showArticleVc animated:NO];
+                showArticleVc.title = self.sorts[indexPath.row];
+            }else{
+                UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"请先登录再查看您的文章" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];;
+                [alert show];
+            }
             break;
         default:
             break;

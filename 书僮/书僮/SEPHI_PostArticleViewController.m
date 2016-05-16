@@ -25,7 +25,7 @@
     self.navigationItem.rightBarButtonItem = post;
     
     //定义一个toolBar
-    UIToolbar *topView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
+    UIToolbar *topView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 30)];
     //设置style
     [topView setBarStyle:UIBarStyleBlack];
     //定义两个flexibleSpace的button，放在toolBar上，这样完成按钮就会在最右边
