@@ -97,7 +97,7 @@
     _fontView.backgroundColor = [UIColor blackColor];
     _fontView.alpha = 0.2;
     [self.view addSubview:_fontView];
-    NSLog(@"%f", _textView.contentSize.height);
+ 
     
     UIButton *backBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth - 100, kScreenWidth - 100 )];
     backBtn.backgroundColor = [UIColor clearColor];
@@ -167,12 +167,12 @@
 {
     if (sender.direction == UISwipeGestureRecognizerDirectionLeft) {
         [self downPage];
-        NSLog(@"left------left");
+ 
     }
     
     if (sender.direction == UISwipeGestureRecognizerDirectionRight) {
         [self upPage];
-        NSLog(@"right------right");
+
     }
 }
 -(void)dismissClick{
@@ -239,7 +239,7 @@
         return;
     }
     [pan setTranslation:CGPointMake(0, 0) inView:_textView];
-    NSLog(@"%f",point.x);
+
     return;
 }
 
@@ -252,7 +252,7 @@
         return;
     }
     _currentPage = _currentPage - 1;
-    NSLog(@"%d",_currentPage);
+
     
     
     [UIView beginAnimations:nil context:nil];

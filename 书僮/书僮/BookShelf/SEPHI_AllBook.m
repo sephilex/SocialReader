@@ -42,4 +42,16 @@
     return allBook;
 }
 
+- (NSString *)directoryForBookname:(NSString *)bookname
+{
+    NSString *dir;
+    for (NSString *tmp in _bookDirectories) {
+        if ([tmp rangeOfString:bookname].location==NSNotFound)
+        {
+            dir = tmp;
+            break;
+        }
+    }
+    return dir;
+}
 @end

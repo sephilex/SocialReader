@@ -18,4 +18,5 @@
 @property (nonatomic, strong) NSArray *bookDirectories;
 
 + (instancetype)AllBook;
+- (NSString *)directoryForBookname:(NSString *)bookname;
 @end

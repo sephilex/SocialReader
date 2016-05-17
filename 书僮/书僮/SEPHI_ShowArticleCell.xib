@@ -20,14 +20,13 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wky-Sg-CSB">
                                 <rect key="frame" x="2" y="2" width="320" height="21"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="M6I-U7-U3S">
                                 <rect key="frame" x="2" y="25" width="318" height="203"/>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -51,12 +50,6 @@
                                     <action selector="collection:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="iRu-uU-6xE"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KOP-U5-pFw">
-                                <rect key="frame" x="2" y="233" width="190" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SCv-4t-vUM">
                                 <rect key="frame" x="145" y="259" width="30" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -65,14 +58,29 @@
                                     <action selector="comment" destination="KGk-i7-Jjw" eventType="touchUpInside" id="AQB-6q-exG"/>
                                 </connections>
                             </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9of-Qu-j8G">
+                                <rect key="frame" x="5" y="259" width="36" height="34"/>
+                                <state key="normal" title="删除"/>
+                                <connections>
+                                    <action selector="delete" destination="KGk-i7-Jjw" eventType="touchUpInside" id="xQY-To-aBp"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6aq-tB-BCH">
+                                <rect key="frame" x="5" y="233" width="46" height="21"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="usernameShowArticle" destination="KGk-i7-Jjw" eventType="touchUpInside" id="C4A-Pa-qIp"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="SCv-4t-vUM" firstAttribute="centerX" secondItem="CXW-Xv-crv" secondAttribute="centerX" id="2Sk-ex-ZM3"/>
                             <constraint firstAttribute="bottom" secondItem="stn-fy-hOc" secondAttribute="bottom" constant="5" id="2T3-l3-Js3"/>
+                            <constraint firstItem="9of-Qu-j8G" firstAttribute="top" secondItem="stn-fy-hOc" secondAttribute="top" id="5xs-mD-KVs"/>
                             <constraint firstAttribute="bottom" secondItem="M6I-U7-U3S" secondAttribute="bottom" constant="70" id="6mG-uB-IT9"/>
-                            <constraint firstItem="KOP-U5-pFw" firstAttribute="leading" secondItem="CXW-Xv-crv" secondAttribute="leading" constant="2" id="9vV-qA-09r"/>
-                            <constraint firstItem="KOP-U5-pFw" firstAttribute="top" secondItem="l4F-tq-ad1" secondAttribute="top" id="DZ5-TS-9Qq"/>
+                            <constraint firstItem="6aq-tB-BCH" firstAttribute="leading" secondItem="CXW-Xv-crv" secondAttribute="leading" constant="5" id="FYU-nX-98M"/>
+                            <constraint firstItem="6aq-tB-BCH" firstAttribute="bottom" secondItem="l4F-tq-ad1" secondAttribute="bottom" id="Kuw-ee-JRQ"/>
                             <constraint firstItem="M6I-U7-U3S" firstAttribute="leading" secondItem="CXW-Xv-crv" secondAttribute="leading" constant="2" id="Lcw-MO-n0O"/>
                             <constraint firstItem="wky-Sg-CSB" firstAttribute="leading" secondItem="CXW-Xv-crv" secondAttribute="leading" constant="2" id="T8Y-WX-Ohm"/>
                             <constraint firstItem="M6I-U7-U3S" firstAttribute="top" secondItem="wky-Sg-CSB" secondAttribute="bottom" constant="2" id="TAI-GP-98n"/>
@@ -80,12 +88,14 @@
                             <constraint firstAttribute="trailing" secondItem="l4F-tq-ad1" secondAttribute="trailing" id="Yn5-3X-X3D"/>
                             <constraint firstItem="wky-Sg-CSB" firstAttribute="top" secondItem="CXW-Xv-crv" secondAttribute="top" constant="2" id="amP-hp-6wu"/>
                             <constraint firstItem="wky-Sg-CSB" firstAttribute="width" secondItem="CXW-Xv-crv" secondAttribute="width" id="hKw-CR-NRa"/>
+                            <constraint firstItem="9of-Qu-j8G" firstAttribute="leading" secondItem="CXW-Xv-crv" secondAttribute="leading" constant="5" id="hg7-GU-7di"/>
                             <constraint firstItem="SCv-4t-vUM" firstAttribute="top" secondItem="stn-fy-hOc" secondAttribute="top" id="k4O-xy-43F"/>
                             <constraint firstAttribute="trailing" secondItem="stn-fy-hOc" secondAttribute="trailing" constant="5" id="lmN-eC-Pl8"/>
                             <constraint firstAttribute="trailing" secondItem="M6I-U7-U3S" secondAttribute="trailing" id="o96-Rj-7Ln"/>
-                            <constraint firstItem="l4F-tq-ad1" firstAttribute="leading" secondItem="KOP-U5-pFw" secondAttribute="trailing" id="pqn-Eg-zdy"/>
+                            <constraint firstAttribute="bottom" secondItem="9of-Qu-j8G" secondAttribute="bottom" constant="5" id="ojc-Rf-2iB"/>
                             <constraint firstItem="l4F-tq-ad1" firstAttribute="top" secondItem="M6I-U7-U3S" secondAttribute="bottom" constant="5" id="xfd-Xv-Zwk"/>
                             <constraint firstItem="stn-fy-hOc" firstAttribute="top" secondItem="l4F-tq-ad1" secondAttribute="bottom" constant="5" id="yDG-zA-J58"/>
+                            <constraint firstItem="6aq-tB-BCH" firstAttribute="top" secondItem="l4F-tq-ad1" secondAttribute="top" id="z5N-Xg-vcc"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -101,8 +111,9 @@
                 <outlet property="collectionBtn" destination="stn-fy-hOc" id="JvF-Tc-Tyy"/>
                 <outlet property="contentTextView" destination="M6I-U7-U3S" id="EjM-7V-OUu"/>
                 <outlet property="dateLabel" destination="l4F-tq-ad1" id="MmK-99-stw"/>
+                <outlet property="deleteBtn" destination="9of-Qu-j8G" id="79N-3C-5n3"/>
                 <outlet property="titleLabel" destination="wky-Sg-CSB" id="9dz-c9-Jm8"/>
-                <outlet property="usernameLabel" destination="KOP-U5-pFw" id="Z4o-c9-9a5"/>
+                <outlet property="usernameBtn" destination="6aq-tB-BCH" id="nIr-qs-tts"/>
             </connections>
             <point key="canvasLocation" x="454" y="371.5"/>
         </tableViewCell>

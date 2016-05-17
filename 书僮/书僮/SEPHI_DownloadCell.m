@@ -51,6 +51,9 @@
     }];
     [task resume];
     [sender setTitle:@"已下载" forState:UIControlStateNormal];
+    [sender setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+
+    
 }
 
 /**
@@ -117,6 +120,11 @@
 {
     _bookNameLabel.text = bookInCloud.bookName;
     _bookInCloud = bookInCloud;
+    if (bookInCloud.isExist) {
+        [self.downloadBtn setTitle:@"已下载" forState:UIControlStateNormal];
+        [self.downloadBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [self.downloadBtn setUserInteractionEnabled:NO];
+    }
     if (tag%2==0) {
         _background.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"downLight"]];
     }else{

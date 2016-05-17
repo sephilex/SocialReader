@@ -42,6 +42,10 @@
     
     self.articleForPost.delegate = self;
     
+//    self.titleForPost.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"barImage"]];
+    self.articleForPost.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"leftbackimage"]];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"downLight"]];
+//    [self.articleForPost.layer setCornerRadius:10];
     [_articleForPost setInputAccessoryView:topView];
 }
 
@@ -53,6 +57,8 @@
         [article setObject:self.titleForPost.text forKey:@"title"];
         [article setObject:self.articleForPost.text forKey:@"content"];
         [article setObject:bUser.username forKey:@"username"];
+        [bUser addObjectsFromArray:@[self.titleForPost.text] forKey:@"articleName"];
+        [bUser updateInBackground];
         [article saveInBackgroundWithResultBlock:^(BOOL isSuccessful, NSError *error) {
             if (isSuccessful) {
                 //创建成功后会返回objectId，updatedAt，createdAt等信息

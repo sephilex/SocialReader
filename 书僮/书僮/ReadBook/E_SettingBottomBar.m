@@ -221,10 +221,9 @@
 
 - (void)showToolBar{
     
-    NSLog(@"打开方法");
+
     CGRect newFrame = self.frame;
     newFrame.origin.y -= (kBottomBarH +64);
-    NSLog(@"%f",newFrame.origin.y);
     float currentPage = [[NSString stringWithFormat:@"%ld",_chapterCurrentPage] floatValue] + 1;
     float totalPage = [[NSString stringWithFormat:@"%ld",_chapterTotalPage] floatValue];
     if (currentPage == 1) {//强行放置头部
@@ -243,11 +242,9 @@
 }
 
 - (void)hideToolBar{
-    NSLog(@"关闭方法");
     CGRect newFrame = self.frame;
     newFrame.origin.y += (kBottomBarH + 64);
-    
-    NSLog(@"%f",newFrame.origin.y);
+
     [UIView animateWithDuration:0.18 animations:^{
         self.frame = newFrame;
     } completion:^(BOOL finished) {

@@ -19,4 +19,6 @@
 @property (nonatomic, strong) NSDate *date;
 /** 评论 */
 @property (nonatomic, strong) NSArray *commentArray;
+/** objectId */
+@property (nonatomic, strong) NSString *objectId;
 @end

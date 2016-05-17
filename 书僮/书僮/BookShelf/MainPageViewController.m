@@ -50,8 +50,7 @@
 
         NSMutableArray *bookShelfArray = [NSMutableArray array];
         for (int i=0; i<allBook.bookNames.count; i=i+3) {
-            
-            NSLog(@"%@", allBook.bookNames[i]);
+
             if ((i+1)==allBook.bookNames.count)
             {
                 BookShelf *bookShelf = [BookShelf bookShelfWihtStr:allBook.bookNames[i]
@@ -65,7 +64,7 @@
                                                            andStr2:allBook.bookNames[i+1]
                                                            andStr3:@"none"
                                                            andRow:i/3];
-                NSLog(@"最后一层最后一本书%@", allBook.bookNames[i+1]);
+
                 [bookShelfArray addObject:bookShelf];
                 _mod = 1;
             }else{
@@ -90,9 +89,6 @@
     NSString *bookDircetory = [documentPath objectAtIndex:0];
     NSArray *bookNameArray = [[NSFileManager defaultManager] subpathsOfDirectoryAtPath:bookDircetory error:nil];
 
-    
-    for (NSString *s in bookNameArray)
-    { NSLog(@"%@", s);}
     
     self.title = @"书籍列表";
     self.view.backgroundColor = [UIColor whiteColor];
@@ -151,9 +147,7 @@
 //    rc.tag = tag;
     rc.bookName = self.allBook.bookNames[tag];
     rc.bookDirectory = self.allBook.bookDirectories[tag];
-    NSLog(@"tag==%ld", tag);
-    NSLog(@"bookname==%@", rc.bookName);
-    NSLog(@"bookdic==%@", rc.bookDirectory);
+
     [self.navigationController pushViewController:rc animated:YES];
 }
 
@@ -199,7 +193,6 @@
             NSLog(@"file1 url %@",file.url);
         }
     } withProgressBlock:^(CGFloat progress) {
-        NSLog(@"上传进度%.2f",progress);
         hud.labelText = [NSString stringWithFormat:@"上传中%.2f%%", progress*100];
     }];
     

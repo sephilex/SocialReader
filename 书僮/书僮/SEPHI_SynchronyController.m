@@ -81,12 +81,11 @@ const NSInteger limit = 10;
         for (BmobObject *obj in array) {
             //打印playerName
             SEPHI_BookInCloud *bookInCloud = [[SEPHI_BookInCloud alloc] init];
-            NSLog(@"booknameindex%ld", [bookNameArray indexOfObject:@"萧十一郎"]);
-            if ([bookNameArray indexOfObject:[obj objectForKey:@"bookName"]]>1000) {
-                bookInCloud.bookName = [obj objectForKey:@"bookName"];
-                bookInCloud.file = [obj objectForKey:@"filetype"];
-                [_bookInCloudArray addObject:bookInCloud];
-            }
+            bookInCloud.isExist = [bookNameArray containsObject:[obj objectForKey:@"bookName"]];
+            bookInCloud.bookName = [obj objectForKey:@"bookName"];
+            bookInCloud.file = [obj objectForKey:@"filetype"];
+            bookInCloud.objectId = [obj objectId];
+            [_bookInCloudArray addObject:bookInCloud];
 //            NSLog(@"obj.bookName = %@", [obj objectForKey:@"bookName"]);
 //            NSLog(@"obj.bookName = %@", [obj objectForKey:@"filetype"]);
 //            //打印objectId,createdAt,updatedAt
@@ -98,9 +97,53 @@ const NSInteger limit = 10;
         NSLog(@"数据库元素个数%ld", array.count);
         [_DLTableView.mj_header endRefreshing];
     }];
+   
 
 }
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    SEPHI_BookInCloud *tmp = _bookInCloudArray[indexPath.row];
+    
+    NSLog(@"%@", tmp.file);
+    [tmp.file deleteInBackground:^(BOOL isSuccessful, NSError *error) {
+        if (isSuccessful) {
+            NSLog(@"successful!");
+            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"删除成功" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];;
+            [alert show];
+        }else{
+            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"删除失败，请检查网络" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];;
+            [alert show];
+        }
+    }];
+    BmobQuery *bquery = [BmobQuery queryWithClassName:@"Book"];
+    [bquery getObjectInBackgroundWithId:tmp.objectId block:^(BmobObject *object, NSError *error){
+        if (error) {
+            //进行错误处理
+            NSLog(@"进行错误处理");
+        }
+        else{
+            if (object) {
+                //异步删除object
+                [object deleteInBackgroundWithBlock:^(BOOL isSuccessful, NSError *error) {
+                    if (isSuccessful) {
+                        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"删除成功" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];;
+                        [alert show];
+                    }else{
+                        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"删除失败，请检查网络" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];;
+                        [alert show];
+                    }
+                }];
+            }
+        }
+    }];
+    [self.bookInCloudArray removeObjectAtIndex:indexPath.row];
+    [_DLTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+}
 
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return @"删除";
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     NSLog(@"%ld", self.count);
     return _bookInCloudArray.count;

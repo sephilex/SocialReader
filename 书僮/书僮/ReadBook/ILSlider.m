@@ -132,7 +132,6 @@
     CGPoint touchPoint = [[touches anyObject] locationInView:self];
     self.ratioNum = (_direction == ILSliderDirectionHorizonal ? touchPoint.x : touchPoint.y) / (_direction == ILSliderDirectionHorizonal ? self.frame.size.width : self.frame.size.height);
 
-   // NSLog(@"_ratioNum == %f",_ratioNum);
 }
 
 - (void)setRatioNum:(CGFloat)ratioNum {
@@ -140,7 +139,7 @@
         _ratioNum = ratioNum;
         self.value = _minValue + ratioNum * (_maxValue - _minValue);
     }
-  //  NSLog(@"_value = %f",_value);
+
 }
 
 - (void)setValue:(CGFloat)value {

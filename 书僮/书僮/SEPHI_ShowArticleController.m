@@ -16,6 +16,7 @@
 @interface SEPHI_ShowArticleController ()<UITableViewDelegate, UITableViewDataSource, SEPHI_ShowArticleCellDelegate>
 /** showArtile */
 @property (nonatomic, strong) UITableView *showArticleView;
+
 /** 文章模型数组 */
 @property (nonatomic, strong) NSMutableArray *articleArray;
 @end
@@ -54,6 +55,7 @@
                 article.content = [obj objectForKey:@"content"];
                 article.username = [obj objectForKey:@"username"];
                 article.date = [obj createdAt];
+                article.objectId = [obj objectId];
                 [_articleArray addObject:article];
                 
                 //                        NSLog(@"obj.title = %@", article.title);
@@ -79,6 +81,7 @@
                     article.content = [obj objectForKey:@"content"];
                     article.username = [obj objectForKey:@"username"];
                     article.date = [obj createdAt];
+                    article.objectId = [obj objectId];
                     [_articleArray addObject:article];
                 }
                 
@@ -93,17 +96,18 @@
             NSLog(@"数据库元素个数%ld", array.count);
             [_showArticleView.mj_header endRefreshing];
         }];
-    }else if(_tag==3){
+    }else if(_tag==3||_tag==4){
         [bquery findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error) {
             for (BmobObject *obj in array) {
                 //打印playerName
                 
                 SEPHI_Article *article = [[SEPHI_Article alloc] init];
-                if ([obj objectForKey:@"username"]==bUser.username) {
+                if ([obj objectForKey:@"username"]==_username) {
                     article.title = [obj objectForKey:@"title"];
                     article.content = [obj objectForKey:@"content"];
                     article.username = [obj objectForKey:@"username"];
                     article.date = [obj createdAt];
+                    article.objectId = [obj objectId];
                     [_articleArray addObject:article];
                 }
                 
@@ -121,6 +125,18 @@
     }
 
 }
+- (void)pushToShowOne:(NSString *)author
+{
+    SEPHI_ShowArticleController *showArticleVc = [[SEPHI_ShowArticleController alloc] init];
+    showArticleVc.username = author;
+    showArticleVc.tag = 4;
+    [self.navigationController pushViewController:showArticleVc animated:NO];
+}
+- (void)refresh
+{
+    [self loadArticle];
+}
+
 - (void)commentPush:(NSString *)articleName
 {
     SEPHI_CommentController *commentVc = [[SEPHI_CommentController alloc] init];
@@ -143,6 +159,11 @@
 {
     SEPHI_ShowArticleCell *cell = [SEPHI_ShowArticleCell cellWithTableView:tableView];
     cell.delegate = self;
+    if (_tag==3) {
+        cell.isShowDeleteBtn = NO;
+    }else{
+        cell.isShowDeleteBtn = YES;
+    }
     [cell setArticleCell:_articleArray[indexPath.row] andTag:indexPath.row];
     return cell;
 }

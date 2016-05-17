@@ -102,7 +102,6 @@
         SEPHI_AllBook *allBook = [SEPHI_AllBook AllBook];
         NSString *bookName = allBook.bookNames[btn.tag];
  
-        NSLog(@"长按事件");
         NSString *string = [NSString stringWithFormat:@"删除或上传\"%@\"吗？", bookName];
         UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"提示" message:string delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"删除",@"上传", nil];
         alert.delegate = self;

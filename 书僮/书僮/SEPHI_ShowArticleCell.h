@@ -11,12 +11,15 @@
 @protocol SEPHI_ShowArticleCellDelegate<NSObject>
 
 - (void)commentPush:(NSString *)articleName;
-
+- (void)refresh;
+- (void)pushToShowOne:(NSString *)author;
 @end
 
 @interface SEPHI_ShowArticleCell : UITableViewCell
 
 @property (nonatomic,assign) id<SEPHI_ShowArticleCellDelegate>delegate;
+/** isShowDeleteBtn*/
+@property (nonatomic, assign) BOOL isShowDeleteBtn;
 
 + (instancetype)cellWithTableView:(UITableView *)tableView;
 - (void)setArticleCell:(SEPHI_Article *)article andTag:(NSInteger)tag;

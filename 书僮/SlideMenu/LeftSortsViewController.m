@@ -128,6 +128,7 @@
             if (bUser) {
                 showArticleVc = [[SEPHI_ShowArticleController alloc] init];
                 showArticleVc.tag = 3;
+                showArticleVc.username = bUser.username;
                 [tempAppDel.mainNavigationController pushViewController:showArticleVc animated:NO];
                 showArticleVc.title = self.sorts[indexPath.row];
             }else{

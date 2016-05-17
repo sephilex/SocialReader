@@ -14,4 +14,12 @@
 @property (nonatomic, strong) NSString *bookName;
 /** bmobfile */
 @property (nonatomic, strong) BmobFile *file;
+/** 本地是否存在 */
+@property (nonatomic, assign) BOOL isExist;
+/** 本地路劲 */
+@property (nonatomic, strong) NSString *bookDirectory;
+/** 云端是否存在 */
+@property (nonatomic, assign) BOOL isExistInCloud;
+/** bookObject */
+@property (nonatomic, strong) NSString *objectId;
 @end
