@@ -11,4 +11,6 @@
 @interface SEPHI_CommentController : UIViewController
 /** 评论的文章 */
 @property (nonatomic, strong) NSString *articleName;
+/** 评论的文章 */
+@property (nonatomic, strong) NSString *bookName;
 @end

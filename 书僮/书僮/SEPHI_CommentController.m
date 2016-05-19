@@ -76,14 +76,22 @@
 
 - (void) send
 {
+    NSString *table = @"comment";
+    NSString *col = @"articleName";
+    NSString *name = self.articleName;
+    if(_bookName){
+        table = @"bookComment";
+        col = @"bookName";
+        name = self.bookName;
+    }
     BmobUser *bUser = [BmobUser getCurrentUser];
     if (bUser) {
     [_commentView.mj_header beginRefreshing];
-    BmobObject *obj = [BmobObject objectWithClassName:@"comment"];
+    BmobObject *obj = [BmobObject objectWithClassName:table];
     BmobUser *bUser = [BmobUser getCurrentUser];
     [obj setObject:bUser.username forKey:@"username"];
     [obj setObject:_commentForPost.text forKey:@"comment"];
-    [obj setObject:_articleName forKey:@"articleName"];
+    [obj setObject:name forKey:col];
     [obj saveInBackgroundWithResultBlock:^(BOOL isSuccessful, NSError *error) {
         if (isSuccessful) {
             //创建成功后会返回objectId，updatedAt，createdAt等信息
@@ -106,9 +114,18 @@
 }
 - (void) loadComment
 {
-    BmobQuery *bquery = [BmobQuery queryWithClassName:@"comment"];
+    NSString *table = @"comment";
+    NSString *col = @"articleName";
+    NSString *name = self.articleName;
+    if(_bookName){
+        table = @"bookComment";
+        col = @"bookName";
+        name = self.bookName;
+    }
+    NSLog(@"bookName==%@", self.bookName);
+    BmobQuery *bquery = [BmobQuery queryWithClassName:table];
     _commentArray = [NSMutableArray array];
-    [bquery whereKey:@"articleName" containedIn:[NSArray arrayWithObject:self.articleName]];
+    [bquery whereKey:col containedIn:[NSArray arrayWithObject:name]];
     [bquery findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error) {
         for (BmobObject *obj in array) {
             //打印playerName

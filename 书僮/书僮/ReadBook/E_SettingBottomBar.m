@@ -14,7 +14,8 @@
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 
 @interface E_SettingBottomBar()
-
+@property (nonatomic,strong) UIButton *darkBtn;
+@property (nonatomic,strong) UIButton *lightBtn;
 /** 进度条 */
 @property (nonatomic, strong) UISlider *rateSlider;
 
@@ -68,7 +69,7 @@
 //    [self addSubview:showLbl];
     
     self.darkBtn = [UIButton buttonWithType:0];
-    _darkBtn.frame = CGRectMake(kScreenWidth/2 - 80, self.frame.size.height - 54, 44, 44);
+    _darkBtn.frame = CGRectMake(kScreenWidth/2 - 60, self.frame.size.height - 54, 44, 44);
     [_darkBtn setImage:[UIImage imageNamed:@"dark"] forState:0];
     _darkBtn.backgroundColor = [UIColor clearColor];
     _darkBtn.tag = 1;
@@ -81,8 +82,17 @@
     [_lightBtn setImage:[UIImage imageNamed:@"light"] forState:0];
     _lightBtn.tag = 2;
     [_lightBtn addTarget:self action:@selector(changeLightness:) forControlEvents:UIControlEventTouchUpInside];
-    _lightBtn.frame =  CGRectMake(kScreenWidth/2 + 80 - 44, self.frame.size.height - 54, 44, 44);
+    _lightBtn.frame =  CGRectMake(kScreenWidth/2 + 60 - 44, self.frame.size.height - 54, 44, 44);
     [self addSubview:_lightBtn];
+    
+    _commentBtn = [UIButton buttonWithType:0];
+    
+    [_commentBtn setImage:[UIImage imageNamed:@"commentBtn"] forState:0];
+    _commentBtn.tag = 3;
+    [_commentBtn addTarget:self action:@selector(comment) forControlEvents:UIControlEventTouchUpInside];
+    _commentBtn.frame =  CGRectMake(kScreenWidth - 60 , self.frame.size.height - 54, 44, 44);
+    [self addSubview:_commentBtn];
+    
 //    _rateSlider = [[UISlider alloc] initWithFrame:CGRectMake(50, self.frame.size.height - 54 - 40 - 50 , self.frame.size.width - 100, 40)];
 //    [_rateSlider addTarget:self action:@selector(changeSliderRatioNum) forControlEvents:UIControlEventTouchUpInside];
 //    [self addSubview:_rateSlider];
@@ -110,6 +120,7 @@
 //        if (page == 0) {
 //            page = 1;
 //        }
+
         [_delegate sliderToChapterPage:percent];
     }];
 
@@ -201,6 +212,12 @@
 - (void)changeLightness:(UIButton *)sender{
 
     [_delegate lightness:sender.tag];
+    
+}
+
+- (void)comment{
+    
+    [_delegate comment];
     
 }
 

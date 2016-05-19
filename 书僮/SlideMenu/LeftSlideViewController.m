@@ -50,7 +50,7 @@
         //蒙版
         UIView *view = [[UIView alloc] init];
         view.frame = self.leftVc.view.bounds;
-        view.backgroundColor = [UIColor blackColor];
+        view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"leftbackimage"]];
         view.alpha = 0.5;
         self.contentView = view;
         [self.leftVc.view addSubview:view];

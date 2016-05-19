@@ -18,7 +18,7 @@
 - (void)lightness:(NSInteger)tag;
 - (void)sliderToChapterPage:(float)contentPercent;
 - (void)themeButtonAction:(id)myself themeIndex:(NSInteger)theme;
-
+- (void)comment;
 
 @end
 
@@ -30,8 +30,10 @@
 @property (nonatomic,assign) NSInteger chapterTotalPage;
 @property (nonatomic,assign) NSInteger chapterCurrentPage;
 @property (nonatomic,assign) NSInteger currentChapter;
-@property (nonatomic,strong) UIButton *darkBtn;
-@property (nonatomic,strong) UIButton *lightBtn;
+//@property (nonatomic,strong) UIButton *darkBtn;
+//@property (nonatomic,strong) UIButton *lightBtn;
+/** 评论按钮 */
+@property (nonatomic, strong) UIButton *commentBtn;
 
 - (void)changeSliderRatioNum:(float)percentNum;
 

@@ -11,6 +11,7 @@
 #import "E_SettingBottomBar.h"
 #import "SEPHI_PageView.h"
 #import "SEPHI_PerPageView.h"
+#import "SEPHI_CommentController.h"
 
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
@@ -135,6 +136,13 @@
             _pageView.pageLabel.alpha = _pageView.pageLabel.alpha + 0.1;
         }
     }
+}
+
+- (void)comment{
+    SEPHI_CommentController *commentVc = [[SEPHI_CommentController alloc] init];
+    commentVc.bookName = self.bookName;
+    
+    [self.navigationController pushViewController:commentVc animated:NO];
 }
 #pragma -mark 切换背景按钮方法
 - (void)themeButtonAction:(id)myself themeIndex:(NSInteger)theme
