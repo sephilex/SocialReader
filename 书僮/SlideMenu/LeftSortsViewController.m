@@ -110,8 +110,13 @@
             }
             break;
         case 3:
-            syncVc = [[SEPHI_SynchronyController alloc] init];
-            [tempAppDel.mainNavigationController pushViewController:syncVc animated:NO];
+            if (!bUser) {
+                UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"请先登录！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];;
+                [alert show];
+            }else{
+                syncVc = [[SEPHI_SynchronyController alloc] init];
+                [tempAppDel.mainNavigationController pushViewController:syncVc animated:NO];
+            }
             break;
         case 4:
             if (bUser) {
