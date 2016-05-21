@@ -101,7 +101,7 @@
             break;
         case 2:
             if (!bUser) {
-                UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"请先登录！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];;
+                UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"请先登录！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
                 [alert show];
             }else{
                 postArticleVc = [[SEPHI_PostArticleViewController alloc] init];
@@ -111,7 +111,7 @@
             break;
         case 3:
             if (!bUser) {
-                UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"请先登录！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];;
+                UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"请先登录！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
                 [alert show];
             }else{
                 syncVc = [[SEPHI_SynchronyController alloc] init];
@@ -125,7 +125,7 @@
                 [tempAppDel.mainNavigationController pushViewController:showArticleVc animated:NO];
                 showArticleVc.title = self.sorts[indexPath.row];
             }else{
-                UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"请先登录再查看您的收藏" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];;
+                UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"请先登录再查看您的收藏" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
                 [alert show];
             }
             break;
@@ -137,7 +137,7 @@
                 [tempAppDel.mainNavigationController pushViewController:showArticleVc animated:NO];
                 showArticleVc.title = self.sorts[indexPath.row];
             }else{
-                UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"请先登录再查看您的文章" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];;
+                UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"请先登录再查看您的文章" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
                 [alert show];
             }
             break;

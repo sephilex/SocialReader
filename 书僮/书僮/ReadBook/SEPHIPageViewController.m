@@ -206,6 +206,7 @@
     if (self.currentPage==_allPageView.totalPages-1) {
         return nil;
     }
+    NSLog(@"%ld", self.currentPage);
     self.currentPage++;
     _pageView = [SEPHI_PerPageView PerPageViewWithText:[_allPageView movePage:self.currentPage] andImage:self.image andPage:self.currentPage+1 andTotalPage:self.totalPage];
     _dataVc = [SEPHI_PageController pageControll:_pageView];

@@ -165,37 +165,42 @@
 
 - (void)upload:(NSInteger)tag
 {
-    MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.view];
-    NSString *path = self.allBook.bookDirectories[tag];
-    NSString *bookname = self.allBook.bookNames[tag];
-    BmobObject *obj = [[BmobObject alloc] initWithClassName:@"Book"];
     BmobUser *bUser = [BmobUser getCurrentUser];
-    BmobFile *file = [[BmobFile alloc] initWithFilePath:path];
-    
-    [self.view addSubview:hud];
-    hud.labelText = @"后台上传中";
-    [hud showAnimated:YES whileExecutingBlock:^{
-        do {
-            
-        } while (file.url.length<20);
-    } completionBlock:^{
-        [hud removeFromSuperview];
-    }];
+    if (!bUser) {
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"请先登录！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alert show];
+    }else{
+        MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.view];
+        NSString *path = self.allBook.bookDirectories[tag];
+        NSString *bookname = self.allBook.bookNames[tag];
+        BmobObject *obj = [[BmobObject alloc] initWithClassName:@"Book"];
+        BmobUser *bUser = [BmobUser getCurrentUser];
+        BmobFile *file = [[BmobFile alloc] initWithFilePath:path];
+        
+        [self.view addSubview:hud];
+        hud.labelText = @"后台上传中";
+        [hud showAnimated:YES whileExecutingBlock:^{
+            do {
+                
+            } while (file.url.length<20);
+        } completionBlock:^{
+            [hud removeFromSuperview];
+        }];
 
-    [file saveInBackground:^(BOOL isSuccessful, NSError *error) {
-        if (isSuccessful) {
-            NSLog(@"come here");
-            [obj setObject:file  forKey:@"filetype"];
-            [obj setObject:bookname forKey:@"bookName"];
-            [obj setObject:bUser.username forKey:@"username"];
-            [obj saveInBackground];
-            //打印file文件的url地址
-            NSLog(@"file1 url %@",file.url);
-        }
-    } withProgressBlock:^(CGFloat progress) {
-        hud.labelText = [NSString stringWithFormat:@"上传中%.2f%%", progress*100];
-    }];
-    
+        [file saveInBackground:^(BOOL isSuccessful, NSError *error) {
+            if (isSuccessful) {
+                NSLog(@"come here");
+                [obj setObject:file  forKey:@"filetype"];
+                [obj setObject:bookname forKey:@"bookName"];
+                [obj setObject:bUser.username forKey:@"username"];
+                [obj saveInBackground];
+                //打印file文件的url地址
+                NSLog(@"file1 url %@",file.url);
+            }
+        } withProgressBlock:^(CGFloat progress) {
+            hud.labelText = [NSString stringWithFormat:@"上传中%.2f%%", progress*100];
+        }];
+    }
     
 }
 
