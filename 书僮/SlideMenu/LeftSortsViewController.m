@@ -87,9 +87,10 @@
     switch (indexPath.row) {
         case 0:
             loginVc = [[SEPHI_LoginViewController alloc] init];
-            if (bUser) {
-                loginVc.offset = self.view.frame.size.width;
-            }
+//            if (bUser) {
+//                loginVc.offset = self.view.frame.size.width;
+//                loginVc.isHideResBtn = YES;
+//            }
             [tempAppDel.mainNavigationController pushViewController:loginVc animated:NO];
             loginVc.title = self.sorts[indexPath.row];
             break;

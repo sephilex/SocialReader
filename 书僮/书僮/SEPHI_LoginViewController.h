@@ -10,7 +10,4 @@
 
 @interface SEPHI_LoginViewController : UIViewController
 
-/** 显示偏移 */
-@property (nonatomic, assign) double offset;
-
 @end
