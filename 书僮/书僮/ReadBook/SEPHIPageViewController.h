@@ -29,6 +29,7 @@
 @property (nonatomic, assign) NSInteger totalPage;
 /** ranges数组 */
 @property (nonatomic, strong) NSArray *rangsArray;
+
 //@property(nonatomic,strong) NSLayoutManager *textLayout;
 //
 //@property(nonatomic,strong) UITextView *textView;

@@ -12,6 +12,7 @@
 #import "Bmob.h"
 #import "MJRefresh.h"
 
+//屏幕尺寸
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 
@@ -45,6 +46,8 @@
     _sendBtn = [[UIButton alloc] initWithFrame:CGRectMake(kScreenWidth - 60, kScreenHeight - 64 -40, 60, 40)];
     [_sendBtn setTitle:@"发送" forState:UIControlStateNormal];
     [_sendBtn addTarget:self action:@selector(send) forControlEvents:UIControlEventTouchUpInside];
+    
+    
     
     //定义一个toolBar
     UIToolbar *topView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 30)];
@@ -208,5 +211,6 @@
     
 }
 
+ 
 
 @end
